@@ -1,12 +1,12 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace rp\users\controllers;
 
 use Yii;
 use app\common\Utility;
-use app\modules\users\models\Level;
-use app\modules\users\models\LevelSearch;
-use app\modules\users\Controller;
+use rp\users\models\Level;
+use rp\users\models\LevelSearch;
+use rp\users\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -59,13 +59,13 @@ class LevelController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    
+
     public function actionCreate()
     {
-       
-       
+
+
         $model = new Level();
- 
+
         if ($model->load(Yii::$app->request->post()))
         {
            if (array_key_exists('app\modules\users\models\Level',Utility::rules()))
@@ -78,15 +78,15 @@ class LevelController extends Controller
             if ($model->save())
             $model = new Level();; //reset model
         }
- 
+
         $searchModel = new LevelSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
- 
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
-            
+
         ]);
 
     }
@@ -100,12 +100,12 @@ class LevelController extends Controller
         public function actionUpdate($id)
     {
          $model = $this->findModel($id);
-       
- 
+
+
         if ($model->load(Yii::$app->request->post()))
         {
         if (array_key_exists('app\modules\users\models\Level',Utility::rules()))
-           
+
             foreach ($model->attributes as $attribute)
             if (array_key_exists($attribute,Utility::rules()['app\modules\users\models\Level']))
             $model->validators->append(
@@ -115,15 +115,15 @@ class LevelController extends Controller
             if ($model->save())
             $model = new Level();; //reset model
         }
- 
+
        $searchModel = new LevelSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
- 
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
-            
+
         ]);
 
     }

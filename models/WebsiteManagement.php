@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\users\models;
+namespace rp\users\models;
 
 use Yii;
 
@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $name_hi
  * @property string $name_en
- * 
+ *
  */
 class WebsiteManagement extends yii\db\ActiveRecord
 {

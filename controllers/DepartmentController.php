@@ -1,12 +1,12 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace rp\users\controllers;
 
 use Yii;
-use app\common\Utility;
-use app\modules\users\models\Department;
-use app\modules\users\models\DepartmentSearch;
-use app\modules\users\Controller;
+use rp\common\Utility;
+use rp\users\models\Department;
+use rp\users\models\DepartmentSearch;
+use rp\users\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -59,13 +59,13 @@ class DepartmentController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    
+
     public function actionCreate()
     {
-       
-       
+
+
         $model = new Department();
- 
+
         if ($model->load(Yii::$app->request->post()))
         {
            if (array_key_exists('app\modules\users\models\Department',Utility::rules()))
@@ -75,19 +75,19 @@ class DepartmentController extends Controller
                \yii\validators\Validator::createValidator('required', $model, Utility::rules()['app\modules\users\models\Department'][$model->$attribute]['required'])
             );
             $model->updated_at=$model->created_at=time();
-            
+
             if ($model->save())
             $model = new Department();; //reset model
         }
- 
+
         $searchModel = new DepartmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
- 
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
-            
+
         ]);
 
     }
@@ -101,12 +101,12 @@ class DepartmentController extends Controller
         public function actionUpdate($id)
     {
          $model = $this->findModel($id);
-       
- 
+
+
         if ($model->load(Yii::$app->request->post()))
         {
         if (array_key_exists('app\modules\users\models\Department',Utility::rules()))
-           
+
             foreach ($model->attributes as $attribute)
             if (array_key_exists($attribute,Utility::rules()['app\modules\users\models\Department']))
             $model->validators->append(
@@ -116,15 +116,15 @@ class DepartmentController extends Controller
             if ($model->save())
             $model = new Department();; //reset model
         }
- 
+
        $searchModel = new DepartmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
- 
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
-            
+
         ]);
 
     }

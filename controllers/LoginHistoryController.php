@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace rp\users\controllers;
 
 use Yii;
 use app\common\Utility;
-use app\modules\users\models\LoginHistory;
-use app\modules\users\models\LoginHistorySearch;
+use rp\users\models\LoginHistory;
+use rp\users\models\LoginHistorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,8 +35,8 @@ class LoginHistoryController extends Controller
     {
        if (!Yii::$app->user->can('Administrator'))
                throw new NotFoundHttpException('The requested page does not exist for you.');
-      
-         
+
+
         $searchModel = new LoginHistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -63,28 +63,28 @@ class LoginHistoryController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    
+
     public function action1Create()
     {
-       
-       
+
+
         $model = new LoginHistory();
- 
+
         if ($model->load(Yii::$app->request->post()))
         {
-          
+
             if ($model->save())
             $model = new LoginHistory();; //reset model
         }
- 
+
         $searchModel = new LoginHistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
- 
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
-            
+
         ]);
 
     }
@@ -98,12 +98,12 @@ class LoginHistoryController extends Controller
         public function action1Update($id)
     {
          $model = $this->findModel($id);
-       
- 
+
+
         if ($model->load(Yii::$app->request->post()))
         {
         if (array_key_exists('app\modules\users\models\LoginHistory',Utility::rules()))
-           
+
             foreach ($model->attributes as $attribute)
             if (array_key_exists($attribute,Utility::rules()['app\modules\users\models\LoginHistory']))
             $model->validators->append(
@@ -112,15 +112,15 @@ class LoginHistoryController extends Controller
             if ($model->save())
             $model = new LoginHistory();; //reset model
         }
- 
+
        $searchModel = new LoginHistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
- 
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
-            
+
         ]);
 
     }

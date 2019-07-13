@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace rp\users\controllers;
 
 use Yii;
-use app\common\Utility;
-use app\modules\users\models\Designation;
-use app\modules\users\models\DesignationSearch;
-use app\modules\users\models\DesignationType;
-use app\modules\users\Controller;
+use rp\users\common\Utility;
+use rp\users\models\Designation;
+use rp\users\models\DesignationSearch;
+use rp\users\models\DesignationType;
+use rp\users\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -61,17 +61,17 @@ class DesignationController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    
+
     public function action1Create()
     {
-       
-       
+
+
         $model = new Designation();
- 
+
         if ($model->load(Yii::$app->request->post()))
         {
           $model->name_hi=$model->designationType->name_hi.','.$model->level->name_hi;
-         $model->name_en=$model->designationType->name_en.','.$model->level->name_en; 
+         $model->name_en=$model->designationType->name_en.','.$model->level->name_en;
           if (!($searchmodel=Designation::findOne(['designation_type_id'=>$model->designation_type_id,'level_id'=>$model->level_id])))
            {
              $designation_type=DesignationType::findOne($model->designation_type_id);
@@ -80,27 +80,27 @@ class DesignationController extends Controller
             else
              $model->save();
              $model = new Designation();; //reset model
-           
-      
-           
-           
+
+
+
+
             }
-            else 
+            else
               {
                 \Yii::$app->getSession()->setFlash('error', 'Designation already Exists. Try Updating <a href="'.\yii\helpers\Url::to(['/users/designation/update?id='.$searchmodel->id]).'">Update</a>');
               }
         }
-        
- 
+
+
      //   $searchModel = new DesignationSearch();
        // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         //$dataProvider->query=$dataProvider->query->with('user');
- 
+
         return $this->render('create', [
           //  'searchModel' => $searchModel,
            // 'dataProvider' => $dataProvider,
             'model' => $model,
-            
+
         ]);
 
     }
@@ -120,33 +120,33 @@ class DesignationController extends Controller
         if ($model->load(Yii::$app->request->post()))
         {
          $model->name_hi=$model->designationType->name_hi.','.$model->level->name_hi;
-         $model->name_en=$model->designationType->name_en.','.$model->level->name_en; 
-         
+         $model->name_en=$model->designationType->name_en.','.$model->level->name_en;
+
         if (array_key_exists('app\modules\users\models\Designation',Utility::rules()))
-           
+
             foreach ($model->attributes as $attribute)
             if (array_key_exists($attribute,Utility::rules()['app\modules\users\models\Designation']))
             $model->validators->append(
                \yii\validators\Validator::createValidator('required', $model, Utility::rules()['app\modules\masterdata\models\Designation'][$model->$attribute]['required'])
             );
-            
+
             if ($model->createuser==1)
              $model->createUserAndRole();
-             else 
+             else
               $model->save();
             $model = new Designation();; //reset model
-            
-            
+
+
         }
- 
+
        $searchModel = new DesignationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
- 
+
         return $this->render('create', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
-            
+
         ]);
 
     }
@@ -161,26 +161,26 @@ class DesignationController extends Controller
         if ($model->load(Yii::$app->request->post()))
         {
          //$model->name_hi=$model->designationType->name_hi.','.$model->level->name_hi;
-        // $model->name_en=$model->designationType->name_en.','.$model->level->name_en; 
-         
-       
-            
+        // $model->name_en=$model->designationType->name_en.','.$model->level->name_en;
+
+
+
             if (  $model->save())
             {
               $this->redirect(['view','id'=>$model->id]);
             }
            // $model = new Designation();; //reset model
-            
-            
+
+
         }
- 
+
        $searchModel = new DesignationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
- 
+
         return $this->render('updateprofile', [
-           
+
             'model' => $model,
-            
+
         ]);
 
     }
@@ -212,5 +212,5 @@ class DesignationController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    
+
 }

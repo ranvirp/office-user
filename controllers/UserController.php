@@ -1,10 +1,10 @@
 <?php
-namespace app\modules\users\controllers;
+namespace rp\users\controllers;
 use Yii;
-use app\modules\users\models\LoginForm;
-use app\modules\users\models\PasswordResetRequestForm;
-use app\modules\users\models\ResetPasswordForm;
-use app\modules\users\models\User;
+use rp\users\models\LoginForm;
+use rp\users\models\PasswordResetRequestForm;
+use rp\users\models\ResetPasswordForm;
+use rp\users\models\User;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -27,7 +27,7 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'only' => ['logout','changepassword'],
                 'rules' => [
-                    
+
                     [
                         'actions' => ['logout','changepassword'],
                         'allow' => true,
@@ -99,7 +99,7 @@ class UserController extends Controller
         return $this->goHome();
     }
 
-  
+
     public function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
@@ -139,18 +139,18 @@ class UserController extends Controller
      public function actionChangepassword()
     {
        $user = Yii::$app->user->identity;
-       
+
        $user->scenario='passwordchange';
        $user->oldpassword=null;
       if ( $user->load(Yii::$app->request->post()) && $user->changePassword())
-       
+
           return $this->render('passwordchanged');
-        
+
         return $this->render('ChangePassword',['model'=>$user]);
     }
     public function actionChangeusername($id)
     {
-      if (!Yii::$app->user->can('webadmin')) 
+      if (!Yii::$app->user->can('webadmin'))
         throw new BadRequestHttpException('Not Allowed!!!');
       $user = new User;
       $user->scenario='usernamepasswordchange';

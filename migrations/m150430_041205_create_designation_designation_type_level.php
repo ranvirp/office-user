@@ -23,7 +23,7 @@ class m150430_041205_create_designation_designation_type_level extends Migration
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
         ], $tableOptions);
-        $user = new \app\modules\users\models\User;
+        $user = new rp\users\models\User;
         $user->username='admin';
         $user->setPassword('admin');
         $user->save();
@@ -74,12 +74,12 @@ class m150430_041205_create_designation_designation_type_level extends Migration
             'name_hi' => Schema::TYPE_STRING . ' NOT NULL',
             'name_en' => Schema::TYPE_STRING . ' NOT NULL',
             ],$tableOptions);
-        $web=new app\modules\users\models\WebsiteManagement;
+        $web=new rp\users\models\WebsiteManagement;
         $web->name_en='Web Manager';
         $web->name_hi='Web Manager';
         $web->save();
-        $dept=new app\modules\users\models\Department;
-      
+        $dept=new rp\users\models\Department;
+
          $authManager=Yii::$app->authManager;
          if ($authManager)
           {

@@ -1,12 +1,12 @@
 <?php
 
-namespace app\modules\users\controllers;
+namespace rp\users\controllers;
 
 use Yii;
 use app\common\Utility;
-use app\modules\users\models\DesignationType;
-use app\modules\users\models\DesignationTypeSearch;
-use app\modules\users\Controller;
+use rp\users\models\DesignationType;
+use rp\users\models\DesignationTypeSearch;
+use rp\users\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -59,13 +59,13 @@ class DesignationTypeController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    
+
     public function actionCreate()
     {
-       
-       
+
+
         $model = new DesignationType();
- 
+
         if ($model->load(Yii::$app->request->post()))
         {
            if (array_key_exists('app\modules\users\models\DesignationType',Utility::rules()))
@@ -77,15 +77,15 @@ class DesignationTypeController extends Controller
             if ($model->save())
             $model = new DesignationType();; //reset model
         }
- 
+
         $searchModel = new DesignationTypeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
- 
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
-            
+
         ]);
 
     }
@@ -99,12 +99,12 @@ class DesignationTypeController extends Controller
         public function actionUpdate($id)
     {
          $model = $this->findModel($id);
-       
- 
+
+
         if ($model->load(Yii::$app->request->post()))
         {
         if (array_key_exists('app\modules\users\models\DesignationType',Utility::rules()))
-           
+
             foreach ($model->attributes as $attribute)
             if (array_key_exists($attribute,Utility::rules()['app\modules\masterdata\models\DesignationType']))
             $model->validators->append(
@@ -113,15 +113,15 @@ class DesignationTypeController extends Controller
             if ($model->save())
             $model = new DesignationType();; //reset model
         }
- 
+
        $searchModel = new DesignationTypeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
- 
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
-            
+
         ]);
 
     }

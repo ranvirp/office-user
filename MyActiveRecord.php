@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\users;
+namespace rp\users;
 class MyActiveRecord extends \yii\db\ActiveRecord
 {
 public function behaviors()
