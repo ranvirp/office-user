@@ -1,5 +1,5 @@
 <?php
-namespace app\common;
+namespace rp\users\common;
 class Utility
 {
 public function rules()

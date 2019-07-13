@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\users\models;
+namespace rp\users\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\users\models\Designation;
+use rp\users\models\Designation;
 
 /**
  * DesignationSearch represents the model behind the search form about `app\modules\masterdata\models\Designation`.
@@ -60,7 +60,7 @@ class DesignationSearch extends Designation
                 $t[]=$block->code;
               }
               $level=$t;
-            
+
             }
             }
         if (!$this->validate()) {
@@ -68,7 +68,7 @@ class DesignationSearch extends Designation
             // $query->where('0=1');
             return $dataProvider;
         }
-     
+
 //print_r( $level);
 //exit;
         $query->andFilterWhere([

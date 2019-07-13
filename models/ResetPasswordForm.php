@@ -1,6 +1,6 @@
 <?php
-namespace app\modules\users\models;
-use app\modules\users\models\User;
+namespace rp\users\models;
+use rp\users\models\User;
 use yii\base\InvalidParamException;
 use yii\base\Model;
 use Yii;

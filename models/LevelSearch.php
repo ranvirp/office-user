@@ -5,7 +5,7 @@ namespace rp\users\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\users\models\Level;
+use rp\users\models\Level;
 
 /**
  * LevelSearch represents the model behind the search form about `app\modules\users\models\Level`.

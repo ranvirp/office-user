@@ -3,7 +3,7 @@
 namespace rp\users\controllers;
 
 use Yii;
-use app\common\Utility;
+use rp\users\common\Utility;
 use rp\users\models\DesignationType;
 use rp\users\models\DesignationTypeSearch;
 use rp\users\Controller;

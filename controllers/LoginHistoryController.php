@@ -3,7 +3,7 @@
 namespace rp\users\controllers;
 
 use Yii;
-use app\common\Utility;
+use rp\users\common\Utility;
 use rp\users\models\LoginHistory;
 use rp\users\models\LoginHistorySearch;
 use yii\web\Controller;

@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\users\models;
+namespace rp\users\models;
 
 use Yii;
 
@@ -78,43 +78,43 @@ class Level extends \yii\db\ActiveRecord
 	{
 		switch ($attribute)
 		  {
-		   
-									
+
+
 			case 'id':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'dept_id':
 			   return  $form->field($this,$attribute)->dropDownList(\yii\helpers\ArrayHelper::map(Department::find()->asArray()->all(),"id","name_en"),["prompt"=>"None.."]);
-			    
+
 			    break;
-									
+
 			case 'name_hi':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'name_en':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'class_name':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'created_at':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'updated_at':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-			 
+
 			default:
 			break;
 		  }
@@ -127,32 +127,32 @@ class Level extends \yii\db\ActiveRecord
 	    $name='name_'.Yii::$app->language;
 		switch ($attribute)
 		  {
-		   
-									
+
+
 			case 'id':
 			   return $this->id;			    break;
-									
+
 			case 'dept_id':
 			   return Department::findOne($this->dept_id)->name_en;			    break;
-									
+
 			case 'name_hi':
 			   return $this->name_hi;			    break;
-									
+
 			case 'name_en':
 			   return $this->name_en;			    break;
-									
+
 			case 'class_name':
 			   return $this->class_name;			    break;
-									
+
 			case 'created_at':
 			   return $this->created_at;			    break;
-									
+
 			case 'updated_at':
 			   return $this->updated_at;			    break;
-			 
+
 			default:
 			break;
 		  }
     }
-	
+
 }

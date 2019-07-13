@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\users\models;
+namespace rp\users\models;
 
 use Yii;
 
@@ -99,53 +99,53 @@ class Designation extends \app\modules\users\MyActiveRecord
 	{
 		switch ($attribute)
 		  {
-		   
-									
+
+
 			case 'id':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'designation_type_id':
 			   return  $form->field($this,$attribute)->dropDownList(\yii\helpers\ArrayHelper::map(DesignationType::find()->asArray()->all(),"id","name_".Yii::$app->language));
-			    
+
 			    break;
-									
+
 			case 'level_id':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'officer_name_hi':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'officer_name_en':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'officer_mobile':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'officer_mobile1':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'officer_email':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'officer_userid':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-			 
+
 			default:
 			break;
 		  }
@@ -158,35 +158,35 @@ class Designation extends \app\modules\users\MyActiveRecord
 	    $name='name_'.Yii::$app->language;
 		switch ($attribute)
 		  {
-		   
-									
+
+
 			case 'id':
 			   return $this->id;			    break;
-									
+
 			case 'designation_type_id':
 			   return DesignationType::findOne($this->designation_type_id)->$name;			    break;
-									
+
 			case 'level_id':
 			   return $this->level_id;			    break;
-									
+
 			case 'officer_name_hi':
 			   return $this->officer_name_hi;			    break;
-									
+
 			case 'officer_name_en':
 			   return $this->officer_name_en;			    break;
-									
+
 			case 'officer_mobile':
 			   return $this->officer_mobile;			    break;
-									
+
 			case 'officer_mobile1':
 			   return $this->officer_mobile1;			    break;
-									
+
 			case 'officer_email':
 			   return $this->officer_email;			    break;
-									
+
 			case 'officer_userid':
 			   return $this->officer_userid;			    break;
-			 
+
 			default:
 			break;
 		  }
@@ -207,8 +207,8 @@ class Designation extends \app\modules\users\MyActiveRecord
     }
     public function createUserAndRole()
      {
-           
-            
+
+
         $role=$this->designationType->shortcode;
         $username=$role.'_'.strtolower($this->level->name_en);
         $auth = Yii::$app->authManager;
@@ -221,7 +221,7 @@ class Designation extends \app\modules\users\MyActiveRecord
            $rolecreated= $auth->createRole($role);
 		   $auth->add($rolecreated);
 		}
-		
+
 		//$userclass=Yii::$app->getModule('user')->modelClasses['User'];
 		//$usermodel=$userclass::find()->where('username=:username',[':username'=>$username])->one();
 		//$usermodel=null;
@@ -235,41 +235,41 @@ class Designation extends \app\modules\users\MyActiveRecord
         ]);
         if ($usermodel)  $existinguserexists=1;
         }
-        else 
+        else
         {
          $designations=self::find()->andWhere(['officer_userid'=>$this->officer_userid])->asArray()->all();
          if (count($designations)>1) {//duplicate userid assigned
-         //we shall create a new user 
+         //we shall create a new user
          print_r($designations);
-         
+
          $username=$username.'_'.($this->level->code);
          $usermodel=null;
          }
-         
+
          else
          $usermodel=User::findOne($this->officer_userid);
-        
-        } 
+
+        }
        // if ($usermodel && !$this->resetpasswd)
         //return;
-        
-          
+
+
         $password=$username."$$$";
         if ($this->randpasswd)
            $password=Yii::$app->security->generateRandomString();
-           
-		if (!$usermodel) 
+
+		if (!$usermodel)
 		  {
 		  //$usermodel->delete();
 		     $usermodel=new \app\modules\users\models\User;
-		     
+
 		     $usermodel->username=$username;
 		    // if ($existinguserexists)
 		      //  $usermodel->username=$username.'_'.($this->level->code);
 		      $usermodel->setPassword($password);
 		    // $usermodel->email=$username.'@test.com';
 		     //$usermodel->role_id=2;
-		    
+
 		  }
 		   $usermodel->email=$this->officer_email;
 		     //$usermodel->newPassword=$username;
@@ -287,7 +287,7 @@ class Designation extends \app\modules\users\MyActiveRecord
 		          $passwordresetform->sendEmail();
 		          $usermodel->scenario='email';
 		       }
-		     
+
 		     if (!$usermodel->save())
 		      {
 		        print_r($usermodel->errors);
@@ -305,9 +305,9 @@ class Designation extends \app\modules\users\MyActiveRecord
 		      {
 		        print_r($this->errors);exit;
 		      }
-		      
-		    } 
-		   
+
+		    }
+
      }
  public static function getDesignationByUser($userid,$returnobj=false)
  {
@@ -330,5 +330,5 @@ class Designation extends \app\modules\users\MyActiveRecord
     return ($this->officer_name_hi=='')||($this->officer_name_en=='')||
     ($this->officer_mobile=='') ||($this->officer_email=='');
   }
-	
+
 }

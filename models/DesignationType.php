@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\users\models;
+namespace rp\users\models;
 
 use Yii;
 
@@ -34,7 +34,7 @@ class DesignationType extends \yii\db\ActiveRecord
             [['name_hi', 'name_en'], 'string', 'max' => 50],
             [['shortcode'], 'string', 'max' => 10],
             [['shortcode'], 'unique'],
-            
+
         ];
     }
 /**
@@ -67,7 +67,7 @@ class DesignationType extends \yii\db\ActiveRecord
               '-4'=>'Mandal Level Officer',
               '-5'=>'Others',
               ];
-    
+
     }
 
     /**
@@ -84,33 +84,33 @@ class DesignationType extends \yii\db\ActiveRecord
 	{
 		switch ($attribute)
 		  {
-		   
-									
+
+
 			case 'id':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'level_id':
 			   return  $form->field($this,$attribute)->dropDownList(\yii\helpers\ArrayHelper::map(Level::find()->asArray()->all(),"id","name_".Yii::$app->language),["prompt"=>"None.."]);
-			    
+
 			    break;
-									
+
 			case 'name_hi':
 			   return  $form->field($this,$attribute)->textInput(['class'=>'hindiinput form-control']);
-			    
+
 			    break;
-									
+
 			case 'name_en':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'shortcode':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-			 
+
 			default:
 			break;
 		  }
@@ -123,23 +123,23 @@ class DesignationType extends \yii\db\ActiveRecord
 	    $name='name_'.Yii::$app->language;
 		switch ($attribute)
 		  {
-		   
-									
+
+
 			case 'id':
 			   return $this->id;			    break;
-									
+
 			case 'level_id':
 			   return Level::findOne($this->level_id)->$name;			    break;
-									
+
 			case 'name_hi':
 			   return $this->name_hi;			    break;
-									
+
 			case 'name_en':
 			   return $this->name_en;			    break;
-									
+
 			case 'shortcode':
 			   return $this->shortcode;			    break;
-			 
+
 			default:
 			break;
 		  }
@@ -148,5 +148,5 @@ class DesignationType extends \yii\db\ActiveRecord
     {
      return Level::findOne($this->level_id);
     }
-	
+
 }

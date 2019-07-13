@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\users\models;
+namespace rp\users\models;
 
 use Yii;
 use yii\base\NotSupportedException;
@@ -56,7 +56,7 @@ public function scenarios()
             'api'=>['auth_key'],
             'login'=>['username','password_hash','auth_key'],
             'email'=>['email'],
-            
+
         ]);
     }
     /**
@@ -118,7 +118,7 @@ public function scenarios()
             'password_reset_token' => $token,
             'status' => self::STATUS_ACTIVE,
         ]);
-       
+
     }
 
     /**
@@ -220,42 +220,42 @@ public function scenarios()
         public function changePassword()
         {
           $this->scenario='passwordchange';
-          
+
           if( $this->validate() && $this->validatePassword($this->oldpassword) && ($this->newpassword==$this->newpasswordrepeat))
-           
+
               {
               $this->setPassword($this->newpassword);
               $this->save();
               return true;
               }
-              else 
+              else
                 {
                   if (!$this->validatePassword($this->oldpassword)) $this->addError('oldpassword','Your password is invalid');
                   if ($this->newpasswordrepeat!=$this->newpassword) $this->addError('newpasswordrepeat','New password  and repeat password are not same');
                   return false;
                }
-          
+
         }
         public function loginHistory($event)
         {
-          
+
            $userlog=new LoginHistory();
-           
+
            $userlog->username=Yii::$app->user->identity->username;
            $userlog->logintime=time();
            $userlog->sessionid=Yii::$app->session->getId();
-           
+
            if (!$userlog->save()){ ;print_r( $userlog->errors);return false;};
-        
+
         }
           public function logoutHistory($event)
         {
-          
+
            $userlog=LoginHistory::find()->where(['sessionid'=>Yii::$app->session->getId()])->one();
-           
+
            if ($userlog) $userlog->logouttime=time();
-           
+
            if (!$userlog->save()){ ;print_r( $userlog->errors);return false;};
-        
+
         }
 }

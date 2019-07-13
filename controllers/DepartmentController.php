@@ -3,7 +3,7 @@
 namespace rp\users\controllers;
 
 use Yii;
-use rp\common\Utility;
+use rp\users\common\Utility;
 use rp\users\models\Department;
 use rp\users\models\DepartmentSearch;
 use rp\users\Controller;

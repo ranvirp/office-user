@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\users\models;
+namespace rp\users\models;
 
 use Yii;
 
@@ -64,33 +64,33 @@ class Department extends \yii\db\ActiveRecord
 	{
 		switch ($attribute)
 		  {
-		   
-									
+
+
 			case 'id':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'name_hi':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'name_en':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'created_at':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-									
+
 			case 'updated_at':
 			   return  $form->field($this,$attribute)->textInput();
-			    
+
 			    break;
-			 
+
 			default:
 			break;
 		  }
@@ -103,26 +103,26 @@ class Department extends \yii\db\ActiveRecord
 	    $name='name_'.Yii::$app->language;
 		switch ($attribute)
 		  {
-		   
-									
+
+
 			case 'id':
 			   return $this->id;			    break;
-									
+
 			case 'name_hi':
 			   return $this->name_hi;			    break;
-									
+
 			case 'name_en':
 			   return $this->name_en;			    break;
-									
+
 			case 'created_at':
 			   return $this->created_at;			    break;
-									
+
 			case 'updated_at':
 			   return $this->updated_at;			    break;
-			 
+
 			default:
 			break;
 		  }
     }
-	
+
 }
