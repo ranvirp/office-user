@@ -1,11 +1,3 @@
 {
-    "require": {
-        "ranvirp/office-user": "master"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "git@github.com:ranvirp/office-user.git"
-        }
-    ]
+"name": "ranvirp/office-user"
 }
