@@ -364,7 +364,7 @@ class m190604_113659_new_table extends Migration
             'name_en' => Schema::TYPE_STRING,
 
         ],$tableOptions);
-        $this->createTable('{{%parameter}}', [
+            $this->createTable('{{%parameter}}', [
             'id' => Schema::TYPE_PK,
             'type'=>Schema::TYPE_INTEGER,
             'link'=>Schema::TYPE_STRING,
@@ -379,30 +379,43 @@ class m190604_113659_new_table extends Migration
 
 
         ],$tableOptions);
+ $this->createTable('{{%parameter_parse}}', [
+            'id' => Schema::TYPE_PK,
+            'parameter_id'=>Schema::TYPE_INTEGER,
+            'json_value'=>Schema::TYPE_TEXT,
+            
+            'update_time'=>Schema::TYPE_INTEGER,
+'dld_data'=>Schema::TYPE_TEXT,
+ 'level'=>Schema::TYPE_INTEGER,
+            'district_code'=>Schema::TYPE_STRING."(4)",
+            
 
-CREATE TABLE parameter_parse (
-        id integer NOT NULL,
-    parameter_id integer,
-    json_value text,
-    update_time integer,
-    dld_data text,
-    level integer DEFAULT 0,
-    district_code character varying(4) DEFAULT '0'::character varying
-);
-CREATE TABLE parameter_target (
-        id integer NOT NULL,
-    parameter_id integer,
-    district_id character varying(255),
-    parameter_target character varying(255),
-    month integer
-);
-CREATE TABLE parameter_value (
-        id integer NOT NULL,
-    parameter_id integer,
-    district_id character varying(255),
-    parameter_value character varying(255),
-    update_time integer
-);
+
+        ],$tableOptions);
+$this->createTable('{{%parameter_target}}', [
+            'id' => Schema::TYPE_PK,
+            'parameter_id'=>Schema::TYPE_INTEGER,
+            
+            'district_code'=>Schema::TYPE_STRING."(4)",
+'parameter_target'=>Schema::TYPE_STRING."(255)",
+'month'=>Schema::TYPE_INTEGER,
+            
+
+
+        ],$tableOptions);
+ $this->createTable('{{%parameter_value}}', [
+            'id' => Schema::TYPE_PK,
+            'parameter_id'=>Schema::TYPE_INTEGER,
+            'parameter_value'=>Schema::TYPE_STRING,
+            
+            'update_time'=>Schema::TYPE_INTEGER,
+
+            'district_code'=>Schema::TYPE_STRING."(4)",
+            
+
+
+        ],$tableOptions);
+    
 
         $transaction->commit();
     }
